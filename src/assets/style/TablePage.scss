@@ -1,0 +1,127 @@
+.table-block {
+    padding: 150px 0 160px 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    .open {
+        padding-bottom: 30px;
+
+        .open-modal {
+            margin-top: 0 !important;
+        }
+    }
+
+    .table {
+        color: $tableColor;
+        border: 1px solid transparent;
+        text-align: center;
+        letter-spacing: .1em;
+
+        >thead {
+            >tr {
+                >th {
+                    padding: 1%;
+                    border: 1px solid transparent;
+                }
+            }
+        }
+
+        >tbody {
+            >tr {
+                >td {
+                    padding: 10px;
+                    border: 1px solid transparent;
+                    background-color: $tableBg;
+
+                    >input {
+                        width: 80%;
+                        font-family: $font;
+                        text-align: center;
+                        color: $borderBotEdit;
+                        border: none;
+                        border-bottom: 1px solid $borderBotEdit;
+                        outline: none;
+                        background: transparent;
+                    }
+                }
+
+                .table-btns {
+                    display: flex;
+                    justify-content: center;
+                    gap: 20px;
+
+                    .action-edit,
+                    .action-remove,
+                    .action-save,
+                    .action-cancel {
+                        padding: 5px 10px;
+                        font-family: $font;
+                        font-size: 10px;
+                        font-weight: 700;
+                        background: transparent;
+                        text-decoration: none;
+                        text-transform: uppercase;
+                        transition: .5s;
+                        letter-spacing: 2px;
+                        border: 1px solid transparent;
+
+                        &:hover {
+                            color: $linkColor;
+                            border-radius: 5px;
+                        }
+                    }
+
+                    .action-edit {
+                        color: $editBtn;
+
+                        &:hover {
+                            background: $editBtn;
+                            box-shadow: 0 0 5px $editBtn,
+                                0 0 25px $editBtn,
+                                0 0 50px $editBtn,
+                                0 0 100px $editBtn;
+                        }
+                    }
+
+                    .action-remove,
+                    .action-cancel {
+                        color: $removeBtn;
+
+                        &:hover {
+                            background: $removeBtn;
+                            box-shadow: 0 0 5px $removeBtn,
+                                0 0 25px $removeBtn,
+                                0 0 50px $removeBtn,
+                                0 0 100px $removeBtn;
+                        }
+                    }
+
+                    .action-save {
+                        color: $saveBtn;
+
+                        &:hover {
+                            background: $saveBtn;
+                            box-shadow: 0 0 5px $saveBtn,
+                                0 0 25px $saveBtn,
+                                0 0 50px $saveBtn,
+                                0 0 100px $saveBtn;
+                        }
+
+                        &:disabled {
+                            color: $removeBtn;
+
+                            &:hover {
+                                background: transparent;
+                                box-shadow: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

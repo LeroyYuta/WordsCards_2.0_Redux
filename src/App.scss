@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import './variables.scss';
+@import './assets/style/Header.scss';
+@import './assets/style/HomePage.scss';
+@import './assets/style/Button.scss';
+@import './assets/style/Footer.scss';
+@import './assets/style/CardsPage.scss';
+@import './assets/style/Card.scss';
+@import './assets/style/TablePage.scss';
+@import './assets/style/Modal.scss';
+@import './assets/style/GamePage.scss';
+
+body {
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  font-family: $font;
+  background: $backBodyColorGrad;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .cards-app {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.loader-block {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loader {
+    border: 10px solid $linkColor;
+    border-top: 10px solid $headerBgColor;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin .8s linear infinite;
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+
+}

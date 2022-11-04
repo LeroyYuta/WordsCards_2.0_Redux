@@ -1,0 +1,77 @@
+.game-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .disabled {
+        display: none;
+    }
+
+    .game-info {
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        >p {
+            text-align: center;
+            color: $gameLetterColor;
+        }
+    }
+
+    .game-body {
+        max-width: 700px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        cursor: pointer;
+
+        .letter {
+            padding: 20px;
+            background: $tableBg;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $gameLetterColor;
+            transition: .1s;
+            animation: fade .4s ease;
+
+            &:hover {
+                scale: (1.1);
+                transition: .1s;
+                color: $gameLetterHoverColor;
+            }
+        }
+    }
+
+    .word-block {
+        margin-top: 50px;
+        display: flex;
+        gap: 10px;
+
+        >p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            color: $gameLetterColor;
+            background: $gameWordColor;
+            animation: fade .4s ease;
+            
+            @keyframes fade {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

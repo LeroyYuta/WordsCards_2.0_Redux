@@ -1,0 +1,78 @@
+.card-block {
+    padding-top: 150px;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 230px);
+
+    .learned,
+    .count {
+        display: flex;
+        justify-content: center;
+
+        >p {
+            font-size: .8rem;
+            color: $linkColor;
+        }
+    }
+
+    .cards {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        
+        .disabled {
+            display: none;
+        }
+
+        .arrow {
+            transition: .3s;
+
+            &:hover {
+                scale: (1.3);
+                transition: .3s;
+            }
+        }
+
+        .card {
+            max-width: 320px;
+            width: 40%;
+            height: 40vh;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+            border-radius: 20px;
+            background: $headerBgColor;
+            -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+            -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+            box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+            transition: .3s;
+
+            .words {
+                color: $linkColor;
+
+                .word-en {
+                    animation: cards 1s ease;
+                }
+
+                .word-ru {
+                    animation: cards 1s ease;
+                }
+
+                @keyframes cards {
+                    0% {
+                        opacity: 0;
+                    }
+
+                    100% {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}

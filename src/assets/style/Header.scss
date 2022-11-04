@@ -1,0 +1,53 @@
+.header {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background: $headerBgColor;
+    box-shadow: 0px 10px 5px -5px rgba(34, 60, 80, 0.6);
+
+    .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 8px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            transition: .3s;
+            &:hover {
+                scale: (1.1);
+                transition: .3s;
+            }
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .active {
+                padding: 8px 0;
+                color: $linkHover;
+                border-bottom: 3px solid $linkHover;
+                border-top: 3px solid $linkHover;
+            }
+            
+            >a {
+                text-decoration: none;
+                color: $linkColor;
+                transition: .3s;
+
+                &:hover {
+                    padding: 8px 0;
+                    color: $linkHover;
+                    border-bottom: 3px solid $linkHover;
+                    border-top: 3px solid $linkHover;
+                    transition: .3s;
+                }
+            }
+        }
+    }
+}

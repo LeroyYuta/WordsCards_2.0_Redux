@@ -1,0 +1,49 @@
+.home-page {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+
+    .home-title {
+        // padding-top: 150px;
+        text-align: center;
+        background: linear-gradient(to right, #03e9f4, white, #1c5593, #a20099, #03e9f4);
+        background-size: 400% 400%;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-animation: rainbow 5s ease infinite;
+        animation: rainbow 20s ease infinite;
+        font-size: 25px;
+        line-height: 25px;
+    }
+
+    @-webkit-keyframes rainbow {
+        0% {
+            background-position: 0% 50%
+        }
+
+        50% {
+            background-position: 100% 50%
+        }
+
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @keyframes rainbow {
+        0% {
+            background-position: 0% 50%
+        }
+
+        50% {
+            background-position: 100% 50%
+        }
+
+        100% {
+            background-position: 0% 50%
+        }
+    }
+}
