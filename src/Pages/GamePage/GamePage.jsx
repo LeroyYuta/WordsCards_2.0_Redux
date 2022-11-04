@@ -19,6 +19,7 @@ const GamePage = () => {
     const [modalActive, setModalActive] = useState(false);
 
     const randomLetters = () => {
+        //  алгоритм сортировки «Тасование Фишера — Йетса»
         for (let i = allLetters.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
             [allLetters[i], allLetters[j]] = [allLetters[j], allLetters[i]];
@@ -50,8 +51,7 @@ const GamePage = () => {
 
     const handleClickDone = () => {
         const wordString = isWord.word.join('').toLowerCase();
-        if (wordString === 'fuckyou') {
-            console.log('FUCK YOU TOO!');
+        if (wordString === 'hello') {
             setModalActive(true);
         }
 
