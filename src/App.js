@@ -22,6 +22,8 @@ const App = () => {
     )
   }
 
+  console.log(items);
+
   return (
     <div className="cards-app">
       <Router>

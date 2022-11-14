@@ -12,12 +12,14 @@ const initialLetters = {
 const initialBtnState = {
     btnGo: false,
     btnDone: false,
+    score: 0,
+    wordsDone: [],
 }
 
 const GamePage = ({
-    word
+    words
 }) => {
-    const [allLetters, setAllLetters] = useState(alphabet);
+    const allLetters = alphabet;
     const [isPressed, setIsPressed] = useState(initialBtnState);
     const [isWord, setIsWord] = useState(initialLetters);
     const [modalActive, setModalActive] = useState(false);
@@ -53,23 +55,33 @@ const GamePage = ({
             isWord.word.pop();
             setIsWord({
                 ...isWord,
-                word: isWord.word
-            })
+                word: isWord.word,
+            });
         }
     }
 
     const handleClickDone = () => {
         const wordString = isWord.word.join('').toLowerCase();
-        if (wordString === 'hello') {
-            setModalActive(true);
-        }
+        words.map(item => {
+            if (item.english.toLowerCase().trim() === wordString && !isPressed.wordsDone.includes(wordString)) {
+                setModalActive(true);
+                setIsWord({ word: [] });
+                setIsPressed({
+                    ...isPressed,
+                    score: isPressed.score + isWord.word.length,
+                    wordsDone: [...isPressed.wordsDone, wordString],
+                });
+            }
+        })
     }
 
     return (
         <div className='game-page'>
             {!isPressed.btnGo &&
                 <div className='game-info'>
-                    <p>This is a simple word making game from the table of this application. As soon as you are sure of the composed word - click 'DONE'!</p>
+                    <p>This is a simple word making game from the table of this application. As soon as you are sure of the composed word - click 'DONE'!
+                        <br /><br /> One letter in right word = +1 score
+                    </p>
                     <Button className='check go' onClick={() => handleClick()} label='GO!'></Button>
                 </div>
             }
@@ -77,6 +89,7 @@ const GamePage = ({
             </div>
             {isPressed.btnGo &&
                 <>
+                    <div className='score'>SCORE: {isPressed.score}</div>
                     <div className='game-body'>
                         {
                             allLetters.map((letter) => (

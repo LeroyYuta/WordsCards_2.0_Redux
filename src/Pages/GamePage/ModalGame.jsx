@@ -7,7 +7,7 @@ const ModalGame = ({
     return (
         <div className={modalActive ? 'modal active' : 'modal'} onClick={() => setModalActive(false)}>
             <div className={modalActive ? 'modal-content active' : 'modal-content'} onClick={(e) => e.stopPropagation()}>
-                <p style={{ color: 'white', fontSize: 24 + 'px' }}>BYE...</p>
+                <p style={{ color: 'white', fontSize: 24 + 'px' }}>That's right!</p>
             </div>
         </div>
     )

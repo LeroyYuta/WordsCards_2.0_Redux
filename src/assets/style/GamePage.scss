@@ -22,6 +22,11 @@
         }
     }
 
+    .score {
+        margin: 20px auto;
+        color: $gameLetterColor;
+    }
+
     .game-body {
         max-width: 700px;
         display: flex;
@@ -49,10 +54,12 @@
     }
     .show-block {
         margin-top: 50px;
+        width: 650px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 30px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
 
         .word-clear {
             width: 50px;
