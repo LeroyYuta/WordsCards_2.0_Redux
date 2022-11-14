@@ -19,12 +19,9 @@ export const deleteWordsApi = id => {
         .catch(error => console.error(error))
 }
 
-export const updateWordsApi = (id, param)=> {
+export const updateWordsApi = (id, param) => {
     const baseUrlUpdate = `http://itgirlschool.justmakeit.ru/api/words/${id}/update`;
-
-    return dispatch => {
-        axios.post(corsUrl + baseUrlUpdate, param)
-            .then(response => dispatch(updateWordsApi(response.data)))
-            .catch(error => console.error(error))
-    }
+    axios.post(corsUrl + baseUrlUpdate, param)
+        .then(response => console.log(response.data))
+        .catch(error => console.error(error))
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { alphabet } from './alphabet';
 import { Button } from '../index';
 import ModalGame from './ModalGame';
+import { BsBackspace } from 'react-icons/bs';
+import { IconContext } from "react-icons";
 
 const initialLetters = {
     word: [],
@@ -12,7 +14,9 @@ const initialBtnState = {
     btnDone: false,
 }
 
-const GamePage = () => {
+const GamePage = ({
+    word
+}) => {
     const [allLetters, setAllLetters] = useState(alphabet);
     const [isPressed, setIsPressed] = useState(initialBtnState);
     const [isWord, setIsWord] = useState(initialLetters);
@@ -42,11 +46,16 @@ const GamePage = () => {
                 });
             }
         });
-        // const newData = allLetters.filter((letter) => {
-        //     return letter.id !== id ? letter : null;
-        // });
+    }
 
-        // setAllLetters(newData);
+    const handleClear = () => {
+        if (isWord.word.length > 0) {
+            isWord.word.pop();
+            setIsWord({
+                ...isWord,
+                word: isWord.word
+            })
+        }
     }
 
     const handleClickDone = () => {
@@ -54,7 +63,6 @@ const GamePage = () => {
         if (wordString === 'hello') {
             setModalActive(true);
         }
-
     }
 
     return (
@@ -78,12 +86,17 @@ const GamePage = () => {
                     </div>
                     {isWord.word.length > 0 &&
                         <>
-                            <div className='word-block'>
-                                {
-                                    isWord.word.map((letter, i) => (
-                                        <p key={i}>{letter}</p>
-                                    ))
-                                }
+                            <div className='show-block'>
+                                <div className='word-block'>
+                                    {
+                                        isWord.word.map((letter, i) => (
+                                            <p key={i}>{letter}</p>
+                                        ))
+                                    }
+                                </div>
+                                <IconContext.Provider value={{ size: 2 + 'em' }}>
+                                    <button className='word-clear' onClick={handleClear}><BsBackspace /></button>
+                                </IconContext.Provider>
                             </div>
                             <Button className='check done' onClick={handleClickDone} label='DONE' />
                         </>
