@@ -1,21 +1,17 @@
-import './App.scss';
 import React, { useEffect, lazy } from 'react';
 import { HomePage, TablePage, CardsPage, GamePage, Header, Footer } from './Pages/index';
 import { axiosGetWords } from './Api/getServices';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { store } from './redux/store';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const ErrorPage404 = lazy(() => import('./Pages/ErrorPage/ErrorPage'));
 
 const App = () => {
-  const dispatch = useDispatch();
-  const data = useSelector(state => state);
-  const dataWords = data.items;
-  const isLoading = data.isLoading;
-  console.log(dataWords, data.isLoading);
+  const { items, isLoading } = useSelector(state => state);
 
   useEffect(() => {
-    dispatch(axiosGetWords());
+    store.dispatch(axiosGetWords());
   }, []);
 
   if (isLoading) {
@@ -32,8 +28,8 @@ const App = () => {
         <Header />
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/table' element={<TablePage words={dataWords} />} />
-          <Route path='/cards' element={<CardsPage words={dataWords} />} />
+          <Route path='/table' element={<TablePage words={items} />} />
+          <Route path='/cards' element={<CardsPage words={items} />} />
           <Route path='/game' element={<GamePage />} />
           <Route path='*' element={<ErrorPage404 />} />
         </Routes>

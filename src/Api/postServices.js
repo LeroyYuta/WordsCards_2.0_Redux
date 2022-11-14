@@ -12,19 +12,19 @@ export const addWordsApi = param => {
             .catch(error => console.error(error))
     }
 }
-export const deleteWordsApi = (id) => {
+export const deleteWordsApi = id => {
     const baseUrlDelete = `http://itgirlschool.justmakeit.ru/api/words/${id}/delete`;
     axios.post(corsUrl + baseUrlDelete)
         .then(response => response.data)
         .catch(error => console.error(error))
 }
 
-// export const updateWordsApi = (param, id)=> {
-//     const baseUrlUpdate = `http://itgirlschool.justmakeit.ru/api/words/${id}/update`;
+export const updateWordsApi = (id, param)=> {
+    const baseUrlUpdate = `http://itgirlschool.justmakeit.ru/api/words/${id}/update`;
 
-//     return dispatch => {
-//         axios.post(corsUrl + baseUrlUpdate, param)
-//             .then(response => dispatch(updateWords(response.data)))
-//             .catch(error => console.error(error))
-//     }
-// }
+    return dispatch => {
+        axios.post(corsUrl + baseUrlUpdate, param)
+            .then(response => dispatch(updateWordsApi(response.data)))
+            .catch(error => console.error(error))
+    }
+}

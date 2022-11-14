@@ -2,53 +2,55 @@ import React, { useState } from 'react';
 import Button from '../Button/Button';
 import { next, prev } from '../..';
 
-
-const initialPresses = {
-    pressed: false,
+const initialCount = {
+    count: 0,
     checks: 0
 }
 
 const Card = ({
     words
 }) => {
-    const [count, setCount] = useState(0);
-    const [isPressed, setIsPressed] = useState(initialPresses);
+    const [count, setCount] = useState(initialCount);
+    const [isPressed, setIsPressed] = useState({});
 
     const handleClickNext = () => {
-        setCount(count + 1);
-        setIsPressed({
-            ...isPressed,
-            pressed: false
-        })
-        console.log(isPressed);
+        setCount({
+            ...count,
+            count: count.count + 1
+        });
     }
 
     const handleClickPrev = () => {
-        setCount(count - 1);
+        setCount({
+            ...count,
+            count: count.count - 1
+        });
     }
 
-    const handleClickCheck = () => {
+    const handleClickCheck = id => {
         setIsPressed({
             ...isPressed,
-            pressed: true,
-            checks: isPressed.checks + 1
+            [id]: true,
         });
-        console.log('check');
+        setCount({
+            ...count,
+            checks: count.checks + 1
+        });
     }
 
-    const wordToUpperCaseEn = words[count].english.toUpperCase(),
-        wordToUpperCaseRu = words[count].russian.toUpperCase();
+    const wordToUpperCaseEn = words[count.count].english.toUpperCase(),
+        wordToUpperCaseRu = words[count.count].russian.toUpperCase();
 
-    const showBtnCheck = isPressed.pressed ? 'disabled' : 'check',
-        showWordRu = isPressed.pressed ? 'word-ru' : 'disabled';
+    const showBtnCheck = isPressed[words[count.count].id] ? 'disabled' : 'check',
+        showWordRu = isPressed[words[count.count].id] ? 'word-ru' : 'disabled';
 
-    const prevClass = count === 0 ? 'disabled' : 'prev arrow',
-        nextClass = count === words.length - 1 ? 'disabled' : 'next arrow';
+    const prevClass = count.count === 0 ? 'disabled' : 'prev arrow',
+        nextClass = count.count === words.length - 1 ? 'disabled' : 'next arrow';
 
     return (
         <div className='card-block'>
             <div className='learned'>
-                <p>Learned: {isPressed.checks}/{words.length}</p>
+                <p>Learned: {count.checks}/{words.length}</p>
             </div>
             <div className='cards'>
                 <img className={prevClass} src={prev} alt='prev' onClick={handleClickPrev} />
@@ -58,13 +60,13 @@ const Card = ({
                         <p className={showWordRu}>{wordToUpperCaseRu}</p>
                     </div>
                     <div className="choose-btn">
-                        <Button className={showBtnCheck} label='CHECK' onClick={handleClickCheck} />
+                        <Button className={showBtnCheck} label='CHECK' onClick={() => handleClickCheck(words[count.count].id)} />
                     </div>
                 </div >
                 <img className={nextClass} src={next} alt='next' onClick={handleClickNext} />
             </div>
             <div className='count'>
-                <p>{count + 1}/{words.length}</p>
+                <p>{count.count + 1}/{words.length}</p>
             </div>
         </div>
     )

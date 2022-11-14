@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from '../index';
-import { addWordsApi, deleteWordsApi } from '../../Api/postServices';
-import { deleteWords } from '../../redux/actions';
+import { addWordsApi, deleteWordsApi, updateWordsApi } from '../../Api/postServices';
+import { deleteWords, updateWords } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 
 const newWordsValue = {
@@ -29,11 +29,9 @@ const TablePage = ({
             id: +(initialAllWords[initialAllWords.length - 1].id) + 1,
             [name]: value
         });
-
-        console.log(newWords.id);
     }
 
-    const handleAddNewWords = (e) => {
+    const handleAddNewWords = e => {
         e.preventDefault();
         if (newWords.english && newWords.russian) {
             setInitialAllWords((prevState) => [...prevState, newWords]);
@@ -59,7 +57,7 @@ const TablePage = ({
         });
     }
 
-    const handleEdit = (id) => {
+    const handleEdit = id => {
         setIsEdit(true);
         setNewWords({
             ...newWords,
@@ -70,7 +68,7 @@ const TablePage = ({
     const handleSave = () => {
         setIsEdit(false);
 
-        const newData = initialAllWords.map((row) => {
+        const newData = initialAllWords.map(row => {
             if (row.id === newWords.id) {
                 if (newWords.english) {
                     row.english = newWords.english;
@@ -78,21 +76,23 @@ const TablePage = ({
                 if (newWords.russian) {
                     row.russian = newWords.russian;
                 }
+                updateWordsApi(row.id, { english: row.english, russian: row.russian });
             }
             return row;
         });
+
+        dispatch(updateWords(newData));
         setInitialAllWords(newData);
         setNewWords(newWordsValue);
     }
 
-    const handleRemove = (id) => {
-        const newData = initialAllWords.filter((row) => {
+    const handleRemove = id => {
+        const newData = initialAllWords.filter(row => {
             return row.id !== id ? row : null;
         });
         deleteWordsApi(id);
         dispatch(deleteWords(newData));
         setInitialAllWords(newData);
-
     }
 
     const handleCancel = () => {
@@ -129,7 +129,7 @@ const TablePage = ({
                                                     type='text'
                                                     name='english'
                                                     defaultValue={row.english.toUpperCase()}
-                                                    onChange={(e) => handleChangeInput(e, row.id)}
+                                                    onChange={e => handleChangeInput(e, row.id)}
                                                 />
                                                 : row.english.toUpperCase().trim()
                                         }
@@ -142,7 +142,7 @@ const TablePage = ({
                                                     type='text'
                                                     name='russian'
                                                     defaultValue={row.russian.toUpperCase()}
-                                                    onChange={(e) => handleChangeInput(e, row.id)}
+                                                    onChange={e => handleChangeInput(e, row.id)}
                                                 />
                                                 : row.russian.toUpperCase().trim()
                                         }
